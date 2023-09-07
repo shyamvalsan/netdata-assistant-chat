@@ -4,13 +4,14 @@ from llama_index.llms import OpenAI
 import openai
 from llama_index import SimpleDirectoryReader
 from llama_index import StorageContext, load_index_from_storage
-import replicate
+#import replicate
 import os
 
 st.set_page_config(page_title="Netdata Assistant", page_icon="🦙", layout="centered", initial_sidebar_state="auto", menu_items=None)
 
 # Add a selectbox to allow the user to select the model
-model = st.sidebar.selectbox("Select a model", ["GPT 3.5", "GPT 4", "Llama 2"])
+#model = st.sidebar.selectbox("Select a model", ["GPT 3.5", "GPT 4", "Llama 2"])
+model = st.sidebar.selectbox("Select a model", ["GPT 3.5", "GPT 4"])
 
 # Map the selected model to the corresponding OpenAI model name
 openai_models = {
