@@ -1,7 +1,4 @@
-torch
-transformers
-sentencepiece
-Pillow
+streamlit
 openai
 llama-index
 nltk
