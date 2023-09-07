@@ -21,8 +21,7 @@ openai_models = {
 openai_model = openai_models[model]
 
 #replicate/llama-2-70b-chat:2796ee9483c3fd7aa2e171d38f4ca12251a30609463dcfd4cd76703f22e96cdf
-
-replicate_api = st.secrets.replicate_key
+#replicate_api = st.secrets.replicate_key
 openai.api_key = st.secrets.openai_key
 st.title("Netdata Assistant 🤖 Chat Mode v1")
          
