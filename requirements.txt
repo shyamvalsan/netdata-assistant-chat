@@ -1,3 +1,7 @@
+torch
+transformers
+sentencepiece
+Pillow
 openai
 llama-index
 nltk
