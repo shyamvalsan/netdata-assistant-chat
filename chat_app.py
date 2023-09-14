@@ -32,7 +32,7 @@ def load_data():
     with st.spinner(text="Loading and indexing Netdata learn docs – hang tight! This should take 1-2 minutes."):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
-        service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are a Netdata expert and your job is to answer technical questions from Netdata users in a clear, thorough and detailed manner, with examples and steps. \nALWAYS follow these rules: \n1. Keep your answers based on facts – do not hallucinate. Try to stick the source text.\n 2. If the question cannot be answered from the provided documentation just say so. \n3. For questions about competitors just say you prefer Netdata. \n4. If you are not able to answer, ask the user to reach out to the Netdata community at https://community.netdata.cloud/. \n5. Provide a working hyperlink to the Netdata documentation relevant to this topic at the end of the message."))
+        service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are an expert on Netdata and your job is to answer technical questions from Netdata users in a clear and detailed manner, with examples if possible. Keep your answers based on facts – do not hallucinate. If the question cannot be answered from the provided documentation just say so. For questions about competitors just say you prefer Netdata. If you are not able to answer, ask the user to reach out to the Netdata community at https://community.netdata.cloud/."))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         return index
     
