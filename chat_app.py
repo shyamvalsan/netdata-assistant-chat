@@ -35,16 +35,10 @@ def load_data():
     with st.spinner(text="Loading and indexing Netdata learn docs – hang tight! This should take 1-2 minutes."):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
-        service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are an expert on Netdata and your job is to answer technical questions from Netdata users in a clear and concise manner. Keep your answers based on facts – do not hallucinate. If the question cannot be answered from the provided documentation just say so. For questions about competitors just say you prefer Netdata."))
+        service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are an expert on Netdata and your job is to answer technical questions from Netdata users in a clear and detailed manner, with examples if possible. Keep your answers based on facts – do not hallucinate. If the question cannot be answered from the provided documentation just say so. For questions about competitors just say you prefer Netdata."))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         return index
     
-# Caching index
-#new_index.storage_context.persist()
-# Reading from stored index
-#storage_context = StorageContext.from_defaults(persist_dir="./storage")
-#index = load_index_from_storage(storage_context)
-
 index = load_data()
 chat_engine = index.as_chat_engine(chat_mode="condense_question", verbose=True)
 
