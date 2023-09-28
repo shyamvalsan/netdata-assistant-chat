@@ -13,15 +13,7 @@ filename_fn = lambda filename: {'file_name': filename}
 
 st.set_page_config(page_title="Netdata Assistant", page_icon="logo.png", layout="wide", initial_sidebar_state="collapsed", menu_items=None)
 
-# Add a selectbox to allow the user to select the model
-model = st.sidebar.selectbox("Select a model", ["GPT 3.5", "GPT 4"])
-
-# Map the selected model to the corresponding OpenAI model name
-openai_models = {
-    "GPT 3.5": "gpt-3.5-turbo",
-    "GPT 4": "gpt-4"
-}
-openai_model = openai_models[model]
+openai_model = "gpt-3.5-turbo"
 
 openai.api_key = st.secrets.openai_key
 st.title("⚡Netdata Assistant")
@@ -74,8 +66,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
                 #st.markdown(f"[Read more]({url})")
             message = {"role": "assistant", "content": response.response}
             feedback = streamlit_feedback(feedback_type="thumbs", align="flex-start")
-            feedback
-            if feedback:
-                print(feedback)
             st.session_state.messages.append(message) # Add response to message history 
             sys.stdout.write(f"Response: {message['content']}\n")
