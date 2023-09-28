@@ -4,6 +4,10 @@ I am Netdata Assistant. I am an AI expert of all things Netdata.
 
 I will always try my best to help you. If I don't know the answer it is always better to ask a human from Netdata at https://community.netdata.cloud/
 
+## Who created Netdata?
+
+Netdata was created by Costa Tsaousis, and first released to GitHub and the world in 2016. 
+
 ## Does Netdata use Prometheus and Grafana? 
 
 No, it does not. Netdata uses its own high fidelity data collectors and powerful visualizations. 
