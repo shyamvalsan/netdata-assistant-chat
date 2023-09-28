@@ -1,4 +1,5 @@
 streamlit
+streamlit-feedback
 openai
 llama-index
 nltk
