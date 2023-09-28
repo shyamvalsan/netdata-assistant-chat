@@ -244,15 +244,9 @@ We understand that Netdata is a software piece that is installed on millions of 
   - Netdata is a popular open-source project and is frequently tested by many security analysts.
   - Check also our [security policies and advisories published so far](https://github.com/netdata/netdata/security).
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
 ### :cyclone: Will Netdata consume significant resources on my servers?
 
 No. It will not! We promise this will be fast!
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 Although each Netdata Agent is a complete monitoring solution packed into a single application, and despite the fact that Netdata collects **every metric every single second** and trains **multiple ML models** per metric, you will find that Netdata has amazing performance! In many cases, it outperforms other monitoring solutions that have significantly fewer features or far smaller data collection rates.
 
@@ -267,34 +261,10 @@ This is what you should expect:
 Netdata has extensive internal instrumentation to help us reveal how the resources consumed are used. All these are available in the "Netdata Monitoring" section of the dashboard. Depending on your use case, there are many options to optimize resource consumption.
 
 Even if you need to run Netdata on extremely weak embedded or IoT systems, you will find that Netdata can be tuned to be very performant.
-
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
-### :scroll: How much retention can I have?
-
-As much as you need!
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
-
-Netdata supports **tiering**, to downsample past data and save disk space. With default settings, it has 3 tiers:
-
-  1. `tier 0`, with high resolution, per-second, data.
-  2. `tier 1`, mid-resolution, per minute, data.
-  3. `tier 2`, low-resolution, per hour, data.
-
-All tiers are updated in parallel during data collection. Just increase the disk space you give to Netdata to get a longer history for your metrics. Tiers are automatically chosen at query time depending on the time frame and the resolution requested.
-
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
 ### :rocket: Does it scale? I have really a lot of servers!
 
 Netdata is designed to scale and can handle large volumes of data.
 
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 Netdata is a distributed monitoring solution. You can scale it to infinity by spreading Netdata servers across your infrastructure.
 
 With the streaming feature of the Agent, we can support monitoring ephemeral servers but also allow the creation of "monitoring islands" where metrics are aggregated to a few servers (Netdata Parents) for increased retention, or for offloading production systems.
@@ -307,15 +277,9 @@ Example: the following chart comes from a single Netdata Parent. As you can see 
 
 ![image](https://github.com/netdata/netdata/assets/2662304/33db4aed-86af-4018-a547-e70643308f25)
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
 ### :floppy_disk: My production servers are very sensitive in disk I/O. Can I use Netdata?
 
 Yes, you can!
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 Netdata has been designed to spread disk writes across time. Each metric is flushed to disk every 17 minutes, but metrics are flushed evenly across time, at an almost constant rate. Also, metrics are packed into bigger blocks we call `extents` and are compressed with LZ4 before saving them, to minimize the number of I/O operations made.
 
@@ -332,15 +296,10 @@ To make Netdata not use the disks at all, we suggest the following:
 
 Using the above, the Netdata Agent on your production system will not use a disk.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :raised_eyebrow: How is Netdata different from a Prometheus and Grafana setup?
 
 Netdata is a "ready to use" monitoring solution. Prometheus and Grafana are tools to build your own monitoring solution.
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 First, we have to say that Prometheus as a time-series database and Grafana as a visualizer are excellent tools for what they do.
 
@@ -362,41 +321,15 @@ So, the biggest difference of Netdata to Prometheus, and Grafana, is that we dec
 
 Still, if you are already familiar with Prometheus and Grafana, Netdata integrates nicely with them, and we have reports from users who use Netdata with Prometheus and Grafana in production.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
-### :raised_eyebrow: How is Netdata different from DataDog, New Relic, Dynatrace, X SaaS Provider?
-
-With Netdata your data are always on-prem and your metrics are always high-resolution.
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
-
-Most commercial monitoring providers face a significant challenge: they centralize all metrics to their infrastructure and this is, inevitably, expensive. It leads them to one or more of the following:
-
-  1. be unrealistically expensive
-  2. limit the number of metrics they collect
-  3. limit the resolution of the metrics they collect
-
-As a result, they try to find a balance: collect the least possible data, but collect enough to have something useful out of it.
-
-We, at Netdata, see monitoring in a completely different way: **monitoring systems should be built bottom-up and be rich in insights**, so we focus on each component individually to collect, store, check and visualize everything related to each of them, and we make sure that all components are monitored. Each metric is important.
-
-This is why Netdata trains multiple machine-learning models per metric, based exclusively on their own past (no sampling of data, no sharing of trained models) to detect anomalies based on the specific use case and workload each component is used.
-
 This is also why Netdata alerts are attached to components (instances) and are configured with dynamic thresholds and rolling windows, instead of static values.
 
 The distributed nature of Netdata helps scale this approach: your data is spread inside your infrastructure, as close to the edge as possible. Netdata is not one data lane. Each Netdata Agent is a data lane and all of them together build a massive distributed metrics processing pipeline that ensures all your infrastructure components and applications are monitored and operating as they should.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :raised_eyebrow: How is Netdata different from Nagios, Icinga, Zabbix, etc?
 
 Netdata offers real-time, comprehensive monitoring, with a user-friendly interface and the ability to monitor everything, without any custom configuration required.
 
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 While Nagios, Icinga, Zabbix, and other similar tools are powerful and highly customizable, they can be complex to set up and manage. Their flexibility often comes at the cost of ease-of-use, especially for users who are not systems administrators or do not have extensive experience with these tools. Additionally, these tools generally require you to know what you want to monitor in advance and configure it explicitly.
 
@@ -416,15 +349,11 @@ In comparison to these traditional monitoring tools, Netdata:
 
 Even if you're already using Nagios, Icinga, Zabbix, or similar tools, you can use Netdata alongside them to augment your existing monitoring capabilities with real-time insights and user-friendly dashboards.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :flushed: I feel overwhelmed by the amount of information in Netdata. What should I do?
 
 Netdata is designed to provide comprehensive insights, but we understand that the richness of information might sometimes feel overwhelming. Here are some tips on how to navigate and utilize Netdata effectively...
 
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 Netdata is indeed a very comprehensive monitoring tool. It's designed to provide you with as much information as possible about your system and applications, so that you can understand and address any issues that arise. However, we understand that the sheer amount of data can sometimes be overwhelming.
 
@@ -447,15 +376,11 @@ Here are some suggestions on how to manage and navigate this wealth of informati
 
 Remember, it's not necessary to understand every single metric or chart right away. Netdata is a powerful tool, and it can take some time to fully explore and understand all of its features. Start with the basics and gradually delve into more complex metrics as you become more comfortable with the tool.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :cloud: Do I have to subscribe to Netdata Cloud?
 
 Subscribing to Netdata Cloud is optional but many users find it enhances their experience with Netdata.
 
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 The Netdata Agent dashboard and the Netdata Cloud dashboard are the same. Still, Netdata Cloud provides additional features, that the Netdata Agent is not capable of. These include:
 
@@ -472,8 +397,6 @@ We encourage you to support Netdata by buying a Netdata Cloud subscription. A su
 
 For organizations that need a fully on-prem solution, we provide Netdata Cloud for on-prem installation. [Contact us for more information](mailto:info@netdata.cloud).
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :mag_right: What does the anonymous telemetry collected by Netdata entail?
 
@@ -481,8 +404,6 @@ Your privacy is our utmost priority. As part of our commitment to improving Netd
 
 Should you wish to disable telemetry, instructions for doing so are provided in our installation guides.
 
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 Netdata is in a constant state of growth and evolution. The decisions that guide this development are ideally rooted in data. By analyzing anonymous telemetry data, we can answer questions such as: "What features are being used frequently?", "How do we prioritize between potential new features?" and "What elements of Netdata are most important to our users?"
 
@@ -499,8 +420,6 @@ Please note, even with telemetry disabled, Netdata still requires a [Netdata Reg
 
 Any Netdata Agent can act as a Netdata Registry. Simply designate one Netdata Agent as your registry, and our global Netdata Registry will no longer be in use. For further information on this, please refer to [this guide](https://learn.netdata.cloud/docs/configuring/securing-netdata-agents/registry).
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :smirk: Who uses Netdata?
 
@@ -535,8 +454,6 @@ In a nutshell, Netdata proves invaluable for:
 - **Everyone else**<br/>
   All of us, who are tired of the inefficiency in the monitoring industry and would love a refreshing change and a breath of fresh air. :slightly_smiling_face:
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :globe_with_meridians: Is Netdata open-source?
 
@@ -557,15 +474,10 @@ When you access a Netdata Agent via `http://agent.ip:19999/` a splash screen att
 
 The Netdata Cloud UI is not open-source. But we thought that it is to the benefit of the community to allow everyone to use it directly with Netdata Agents, for free, even if Netdata Cloud is not used.
 
-&nbsp;<br/>&nbsp;<br/>
-</details>
 
 ### :moneybag: What is your monetization strategy?
 
 Netdata generates revenue through subscriptions to advanced features of Netdata Cloud and sales of on-premise and private versions of Netdata Cloud.
-
-<details><summary>Click to see detailed answer ...</summary>
-&nbsp;<br/>&nbsp;<br/>
 
 Netdata generates revenue from these activities:
 
@@ -589,60 +501,6 @@ Our Open-Source Community and the free access to Netdata Cloud, contribute to Ne
 We don't monetize, directly or indirectly, users' or "device heuristics" data. Any data collected from community members are exclusively used for the purposes stated above.
 
 Netdata grows financially when tehnnology intensive organizations and operators, need - due to regulatory or business requirements - the entire Netdata suite (including Netdata Cloud) on-prem or private, bundled with top-tier support. It is a win-win case for all parties involved: these companies get a battle tested, robust and reliable solution, while the broader community that helps us build this product, enjoys it at no cost.
-
-&nbsp;<br/>&nbsp;<br/>
-</details>
-
-## :book: Documentation
-
-Netdata's documentation is available at [**Netdata Learn**](https://learn.netdata.cloud).
-
-This site also hosts a number of [guides](https://learn.netdata.cloud/guides) to help newer users better understand how
-to collect metrics, troubleshoot via charts, export to external databases, and more.
-
-## :tada: Community
-
-<p align="center">
-  <a href="https://discord.com/invite/mPZ6WZKKG2"><img alt="Discord" src="https://img.shields.io/discord/847502280503590932?logo=discord&logoColor=white&label=chat%20on%20discord"></a>
-  <a href="https://community.netdata.cloud"><img alt="Discourse topics" src="https://img.shields.io/discourse/topics?server=https%3A%2F%2Fcommunity.netdata.cloud%2F&logo=discourse&label=discourse%20forum"></a>
-  <a href="https://github.com/netdata/netdata/discussions"><img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/netdata/netdata?logo=github&label=github%20discussions"></a>
-</p>
-
-Netdata is an inclusive open-source project and community. Please read our [Code of Conduct](https://github.com/netdata/.github/blob/main/CODE_OF_CONDUCT.md).
-
-Join the Netdata community:
-
-- Chat with us and other community members on [Discord](https://discord.com/invite/mPZ6WZKKG2).
-- Start a discussion on [GitHub discussions](https://github.com/netdata/netdata/discussions).
-- Open a topic to our [community forums](https://community.netdata.cloud).
-
-> **Meet Up** :people_holding_hands::people_holding_hands::people_holding_hands:<br/>
-> The Netdata team and community members have regular online meetups, usually every 2 weeks.<br/>
-> **You are welcome to join us!**
-> [Click here for the schedule](https://www.meetup.com/netdata/events/).
-
-You can also find Netdata on:<br/>
-[Twitter](https://twitter.com/linuxnetdata) | [YouTube](https://www.youtube.com/c/Netdata) | [Reddit](https://www.reddit.com/r/netdata/) | [LinkedIn](https://www.linkedin.com/company/netdata-cloud/) | [StackShare](https://stackshare.io/netdata) | [Product Hunt](https://www.producthunt.com/posts/netdata-monitoring-agent/) | [Repology](https://repology.org/metapackage/netdata/versions) | [Facebook](https://www.facebook.com/linuxnetdata/)
-
-## :pray: Contribute
-
-Contributions are essential to the success of open-source projects. In other words, we need your help to keep Netdata great!
-
-What is a contribution? All the following are highly valuable to Netdata:
-
-1. **Let us know of the best-practices you believe should be standardized**<br/>
-   Netdata should out-of-the-box detect as many infrastructure issues as possible. By sharing your knowledge and experiences, you help us build a monitoring solution that has baked into it all the best-practices about infrastructure monitoring.
-
-2. **Let us know if Netdata is not perfect for your use case**<br/>
-   We aim to support as many use cases as possible and your feedback can be invaluable. Open a GitHub issue, or start a GitHub discussion about it, to discuss how you want to use Netdata and what you need.
-
-   Although we can't implement everything imaginable, we try to prioritize development on use-cases that are common to our community, are in the same direction we want Netdata to evolve and are aligned with our roadmap.
-
-3. **Support other community members**<br/>
-   Join our community on GitHub, Discord and Reddit. Generally, Netdata is relatively easy to set up and configure, but still people may need a little push in the right direction to use it effectively. Supporting other members is a great contribution by itself!
-
-4. **Add or improve integrations you need**<br/>
-   Integrations tend to be easier and simpler to develop. If you would like to contribute your code to Netdata, we suggest that you start with the integrations you need, which Netdata does not currently support.
 
 General information about contributions:
 
