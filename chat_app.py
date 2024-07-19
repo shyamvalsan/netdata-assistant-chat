@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_feedback import streamlit_feedback
 from llama_index.core import VectorStoreIndex,SimpleDirectoryReader,ServiceContext,PromptTemplate,Document,StorageContext,load_index_from_storage
 from llama_index.llms.openai import OpenAI
+from llama_index.core import Settings
 import openai
 import os
 import sys
