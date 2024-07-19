@@ -13,7 +13,7 @@ filename_fn = lambda filename: {'file_name': filename}
 
 st.set_page_config(page_title="Netdata Assistant", page_icon="logo.png", layout="wide", initial_sidebar_state="collapsed", menu_items=None)
 
-openai_model = "gpt-3.5-turbo"
+openai_model = "gpt-4o-mini"
 
 openai.api_key = st.secrets.openai_key
 st.title("⚡Netdata Assistant")
