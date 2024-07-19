@@ -26,8 +26,16 @@ def load_data():
     with st.spinner(text="Loading and indexing the latest Netdata docs – hang tight! This should take 1-2 minutes."):
         documents = SimpleDirectoryReader('./data_v4/', recursive=True, file_metadata=filename_fn).load_data()
         #print([x.metadata['file_name'] for x in documents])
-        service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are Netdata Assistant, an expert in all things related to Netdata. Respond in an intelligent and professional manner with clear and detailed answers. Answer based on facts – do not hallucinate. If you do not know the answer, point the user to https://community.netdata.cloud/"))
-        index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+        #service_context = ServiceContext.from_defaults(llm=OpenAI(model=openai_model, temperature=0.5, system_prompt="You are Netdata Assistant, an expert in all things related to Netdata. Respond in an intelligent and professional manner with clear and detailed answers. Answer based on facts – do not hallucinate. If you do not know the answer, point the user to https://community.netdata.cloud/"))
+        #index = VectorStoreIndex.from_documents(documents, service_context=service_context)
+        # Configure LLM with custom prompt
+        llm = OpenAI(
+            model="gpt-4o-mini",
+            temperature=0.5,
+            system_prompt="You are Netdata Assistant, an expert in all things related to Netdata. Respond in an intelligent and professional manner with clear and detailed answers. Answer based on facts – do not hallucinate. If you do not know the answer, point the user to https://community.netdata.cloud/"
+        )
+        Settings.llm = llm
+        index = VectorStoreIndex.from_documents(documents)
         return index
     
 index = load_data()
